@@ -7,7 +7,7 @@ export default function BuildHistory() {
     return (
         <>
             <Header repoData={"philip1967/my-awesome-repo-with-long-long-long-repo-name"} appPage={'build-history'} />
-            <div className="container build">
+            <div className="main-container build">
                 {
                     data.data.map(item => {
                         return(

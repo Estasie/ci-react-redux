@@ -1,4 +1,4 @@
-.container.settings
+.settings
     form
         padding: 12px 0
         .buttons
@@ -24,8 +24,14 @@
                         color: $accent-red
                         padding-left: 2px
 @media (max-width: 500px)
-    .container.settings
+    .settings
         form
             .buttons
                 flex-direction: column
                 width: 100%
+
+@media (max-width: 500px)
+    .settings
+        form
+            .buttons
+                margin-top: 0

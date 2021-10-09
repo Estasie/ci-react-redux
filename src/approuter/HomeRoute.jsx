@@ -1,15 +1,14 @@
 import { React } from 'react'
 
-import { Redirect } from 'react-router';
-
 
 import Home from '../pages/Home';
+import BuildHistory from "../pages/BuildHistory";
 
 export default function HomeRoute() {
         const localStorageData = localStorage.getItem("settings");
         if(localStorageData){
-            // if it does - redirect to build-history handler
-            return <Redirect to="/build-history" />
+            // if it does - redirect to build history
+            return <BuildHistory />
         }
         
         return <Home/>

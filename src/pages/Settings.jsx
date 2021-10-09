@@ -6,7 +6,7 @@ export default function Settings() {
     return (
         <>
             <Header appPage={'settings'} />
-            <div className="container settings">
+            <div className="main-container settings">
                 <h4><strong>Settings</strong></h4>
                 <p className="secondary-text">Configure repository connection and synchronization settings.</p>
                 <SettingsForm />

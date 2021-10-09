@@ -28,7 +28,7 @@ h2, h3, h4, p
     line-height: 16px
     color: $text-blue-gray
 
-p.secondary-text-bright
+.secondary-text-bright
     font-size: 13px
     line-height: 16px
     color: $text-secondary-bright
@@ -38,6 +38,11 @@ h2.ci-server-header
 
 h2.build-history-header
     color: $text-black
+    max-height: 30px
+    max-width: 500px
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
 
 h3.commit-numb
     &--green
@@ -47,14 +52,16 @@ h3.commit-numb
     &--red
         color: $accent-red
 
+@media (max-width: 640px)
+    h2
+        &.build-history-header
+            max-width: 340px
 @media (max-width: 520px)
     h2
         font-size: 18px
         line-height: 22px
         font-weight: 500
         &.build-history-header
-            max-width: 16rem
+            max-width: 216px
             max-height: 4.125rem
-            white-space: nowrap
-            overflow: hidden
-            text-overflow: ellipsis
+            white-space: normal
