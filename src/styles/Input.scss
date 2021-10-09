@@ -1,0 +1,83 @@
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+}
+
+input[type="text"], input[type="number"] {
+    @include placeholder {
+        font-family: "YS Text";
+        color: $text-placeholder;
+    }
+    -moz-appearance: textfield;
+    font-family: "YS Text";
+    background: $bg-white;
+    border: 2px solid $border-input;
+    border-radius: 4px;
+    outline: none;
+    &:focus {
+        border: 2px solid $border-control-focused;
+    }
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 58.333333%;
+    max-width: 474px;
+    min-width: 368px;
+
+    &--modal {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+.text-input {
+    padding: 10px 13px;
+    width: 100%;
+    &.invalid-input{
+        border: 2px solid $accent-red;
+        box-shadow: 0 0 8px $shadow-red;
+    }
+}
+
+.numb-input {
+    padding: 10px 13px;
+    width: 52px;
+    text-align: right;
+    &.invalid-input{
+        border: 2px solid $accent-red;
+        box-shadow: 0 0 8px $shadow-red;
+    }
+}
+
+.input-clear {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+@media (max-width: 500px) {
+    .input-wrapper {
+        width: 100%;
+        min-width: 0;
+    }
+}

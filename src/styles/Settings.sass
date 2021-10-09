@@ -1,0 +1,31 @@
+.container.settings
+    form
+        padding: 12px 0
+        .buttons
+            margin-top: 12px
+            display: inline-flex
+            gap: 8px
+
+.form-item
+            margin: 8px 0
+            display: flex
+            flex-direction: column
+            align-items: flex-start
+            &--numb
+                padding: 8px 0
+                display: flex
+                align-items: center
+                gap: 8px
+            label
+                margin-bottom: 6px
+                &.imp
+                    &:after
+                        content: '*'
+                        color: $accent-red
+                        padding-left: 2px
+@media (max-width: 500px)
+    .container.settings
+        form
+            .buttons
+                flex-direction: column
+                width: 100%

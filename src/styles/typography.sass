@@ -1,0 +1,60 @@
+*
+    font-family: 'YS Text', Arial, Helvetica, sans-serif
+h2
+    font-size: 24px
+    line-height: 30px
+    font-weight: 500
+
+h3
+    font-size: 18px
+    line-height: 20px
+
+h4
+    font-size: 15px
+    line-height: 20px
+    font-weight: normal
+
+h2, h3, h4, p
+    margin: 0
+
+.reg-text
+    font-size: 13px
+    line-height: 16px
+    &.attention
+        color: $accent-red
+
+.secondary-text
+    font-size: 13px
+    line-height: 16px
+    color: $text-blue-gray
+
+p.secondary-text-bright
+    font-size: 13px
+    line-height: 16px
+    color: $text-secondary-bright
+
+h2.ci-server-header
+    color: $text-blue-gray
+
+h2.build-history-header
+    color: $text-black
+
+h3.commit-numb
+    &--green
+        color: $accent-green
+    &--yellow
+        color: $accent-orange
+    &--red
+        color: $accent-red
+
+@media (max-width: 520px)
+    h2
+        font-size: 18px
+        line-height: 22px
+        font-weight: 500
+        &.build-history-header
+            max-width: 16rem
+            max-height: 4.125rem
+            white-space: nowrap
+            overflow: hidden
+            text-overflow: ellipsis

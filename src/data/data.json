@@ -1,0 +1,71 @@
+{
+    "data": [
+        {
+            "id": "1241ddaaF133",
+            "status": "failed",
+            "number" : "1368",
+            "descr" : "add documentation for postgrees scaler",
+            "branch" : "master",
+            "hash": "9c9f0b9",
+            "author": "Philip Kirkorov",
+            "date": "1575909015",
+            "buildtime": "1 ч 20 мин"
+        },
+        {
+            "id": "1241ddaaF134",
+            "status": "done",
+            "number" : "1368",
+            "descr" : "add documentation for postgrees scaler",
+            "branch" : "master",
+            "hash": "9c9f0b8",
+            "author": "Philip Kirkorov",
+            "date": "1575909015",
+            "buildtime": "45 мин"
+        },
+        {
+            "id": "1241ddaaF135",
+            "status": "in-progress",
+            "number" : "1368",
+            "descr" : "add documentation for postgrees scaler",
+            "branch" : "master",
+            "hash": "8e9f0a1",
+            "author": "Philip Kirkorov",
+            "date": "1575909015",
+            "buildtime": "10 мин"
+        },
+        {
+            "id": "1241ddaaF136",
+            "status": "failed",
+            "number" : "1368",
+            "descr" : "add documentation for postgrees scaler",
+            "branch" : "master",
+            "hash": "669f0f4",
+            "author": "Philip Kirkorov",
+            "date": "1575909015",
+            "buildtime": "1 ч 10 мин"
+        },
+        {
+            "id": "1241ddaaF137",
+            "status": "failed",
+            "number" : "1368",
+            "descr" : "add documentation for postgrees scaler",
+            "branch" : "master",
+            "hash": "9c9ffb9",
+            "author": "Philip Kirkorov",
+            "date": "1575909015",
+            "buildtime": "1 ч 18 мин"
+        },
+        {
+            "id": "1241ddaaF139",
+            "status": "failed",
+            "number" : "1368",
+            "descr" : "add documentation for postgrees scaler",
+            "branch" : "master",
+            "hash": "9c9fdfa",
+            "author": "Philip Kirkorov",
+            "date": "1575909015",
+            "buildtime": "30 мин"
+        }
+
+    ]
+}
