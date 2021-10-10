@@ -1,13 +1,16 @@
 import React from "react";
-import { useState} from 'react';
+import {useState} from 'react';
 import Button from '../components/Button/Button';
 import {ReactComponent as Settings} from '../assets/svgs/settings.svg';
 import {ReactComponent as Run} from '../assets/svgs/play.svg';
 import ModalForm from '../components/Form/ModalForm';
+import store from "../store/store";
 
 export default function Header(props) {
-    const {appPage, repoData} = props;
+    const {appPage} = props;
     const [open, setOpen] = useState(false)
+
+    const repoHeader = store.getState().settings ? store.getState().settings['github-repository'] : '';
 
     switch (appPage) {
         case "start":
@@ -27,7 +30,7 @@ export default function Header(props) {
         default:
             return (
                 <header className="header-container">
-                    <h2 className="build-history-header">{repoData}</h2>
+                    <h2 className="build-history-header">{repoHeader}</h2>
                     <div className="header-buttons">
                         <Button buttonIcon={Settings} buttonClass={'button-icon--small'} buttonAction={'/settings'}
                                 buttonType={'small'}/>

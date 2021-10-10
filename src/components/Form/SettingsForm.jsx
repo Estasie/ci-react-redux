@@ -3,7 +3,7 @@ import {useState, useCallback} from "react";
 import {useHistory} from "react-router";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-
+import NotFoundError from "../Error/NotFoundError";
 import store from "../../store/store";
 
 const inputs = [{
@@ -11,7 +11,7 @@ const inputs = [{
     inputLabel: "Github repository",
     importantField: true,
     inputType: "text",
-    placeholder: "https://github.com/User/repo"
+    placeholder: "Enter repository name"
 },
     {
         inputId: "build-command",
@@ -50,8 +50,9 @@ export default function SettingsForm(props) {
     );
 
     const [errors, setErrors] = useState({});
-
+    const [serverError, setServerError] = useState({status: false, repository: ""});
     const [sending, setSending] = useState(false);
+
     // callback for input change -> reduces rerender to inputs amount (in our case only 4 re renders)
     const onChangeCallback = useCallback((evt) => {
         const value = evt.target.value;
@@ -70,22 +71,42 @@ export default function SettingsForm(props) {
             if (!value) {
                 errors[key] = true;
             }
+
         });
 
         setErrors(errors);
         if (Object.values(errors).some(Boolean)) {
             return;
         }
-        console.log(store.getState())
-        store.dispatch({type: "SET_SETTINGS", payload: settings})
+
+        //Чтобы создать ошибку - раскомменть код ниже и закомменть 101 - 107 строки ^-^
+
+        // let response = fetch('/api/fetch/post/githubdata', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        //     body: JSON.stringify(settings)
+        // });
+        //
+        // if(response.ok){
+        //     history.push("/")
+        //     localStorage.setItem("settings", JSON.stringify(settings));
+        //     store.dispatch({type: "SET_SETTINGS", payload: settings})
+        // } else {
+        //     setServerError({status: "true", repository: `${settings["github-repository"]}`});
+        // }
+
+
         localStorage.setItem("settings", JSON.stringify(settings));
+        store.dispatch({type: "SET_SETTINGS", payload: settings})
 
         setSending(true);
         setTimeout(() => {
             history.push("/")
         }, 2000)
 
-    }, [settings, history]);
+    }, [settings, history, serverError]);
 
     // input's clear button callback
     const onClearCallback = useCallback(e => {
@@ -99,9 +120,13 @@ export default function SettingsForm(props) {
         <form action="#">
             <span
                 className={Object.values(errors).some(Boolean) ? "reg-text attention" : "hidden"}>Fill out all inputs</span>
+
+            <NotFoundError state={serverError} repository={serverError["repository"]}/>
+
             {inputs.map(input => {
                 return (
-                    <Input inputType={input.inputType} inputValue={settings[input.inputId]} inputState={settings}
+                    <Input key={input.inputId} inputType={input.inputType} inputValue={settings[input.inputId]}
+                           inputState={settings}
                            handleInputChange={onChangeCallback}
                            handleInputClear={onClearCallback}
                            inputId={input.inputId} inputPlaceholder={input.placeholder} inputLabel={input.inputLabel}
