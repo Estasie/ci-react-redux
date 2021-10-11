@@ -9,6 +9,7 @@ import {
     Route,
 } from "react-router-dom";
 
+const footerLinks = [{href : '/', value: 'Support'}, {href: '/', value: 'Learning'}, {href: '/', value: 'Русская версия'}];
 export default function AppRouter() {
     return (
         <Router>
@@ -21,7 +22,7 @@ export default function AppRouter() {
                         <HomeRoute />
                     </Route>
                 </Switch>
-                <Footer />
+                <Footer links={footerLinks} copyright={'2021, Anastasia Beria'}/>
             </>
         </Router>
     )

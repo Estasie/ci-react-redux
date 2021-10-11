@@ -3,13 +3,14 @@ import {useState, useCallback} from "react";
 import {useHistory} from "react-router";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
+import NotFoundError from "../Error/NotFoundError";
 
 const inputs = [{
     inputId: "github-repository",
     inputLabel: "Github repository",
     importantField: true,
     inputType: "text",
-    placeholder: "https://github.com/User/repo"
+    placeholder: "Enter repository name"
 },
     {
         inputId: "build-command",
@@ -39,7 +40,7 @@ const inputs = [{
 
 export default function SettingsForm(props) {
     const history = useHistory();
-    const [state, setState] = useState({
+    const [settings, setSettings] = useState({
             "github-repository": '',
             "main-branch": "",
             "build-command": '',
@@ -48,23 +49,23 @@ export default function SettingsForm(props) {
     );
 
     const [errors, setErrors] = useState({});
-
+    const [serverError, setServerError] = useState({status: false, repository: ""});
     const [sending, setSending] = useState(false);
     // callback for input change -> reduces rerender to inputs amount (in our case only 4 re renders)
     const onChangeCallback = useCallback((evt) => {
         const value = evt.target.value;
-        setState({
-            ...state,
+        setSettings({
+            ...settings,
             [evt.target.name]: value
         });
-    }, [state, setState]);
+    }, [settings, setSettings]);
 
     // form's submit button callback
     const onSubmitCallback = useCallback((e) => {
         e.preventDefault();
 
         const errors = {};
-        Object.entries(state).forEach(([key, value]) => {
+        Object.entries(settings).forEach(([key, value]) => {
             if (!value) {
                 errors[key] = true;
             }
@@ -74,35 +75,56 @@ export default function SettingsForm(props) {
         if (Object.values(errors).some(Boolean)) {
             return;
         }
-        localStorage.setItem("settings", JSON.stringify(state));
+        //Чтобы создать ошибку - раскомменть код ниже ^-^
+
+        // let response = fetch('/api/fetch/post/githubdata', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        //     body: JSON.stringify(settings)
+        // });
+        //
+        // if(response.ok){
+        //     history.push("/")
+        //     localStorage.setItem("settings", JSON.stringify(settings));
+        // } else {
+        //     setServerError({status: "true", repository: `${settings["github-repository"]}`});
+        // }
+
+        // И ЗАКОМЕНТЬ КОД НИЖЕ !! ДО 102 СТРОКИ
+
+        localStorage.setItem("settings", JSON.stringify(settings));
 
         setSending(true);
         setTimeout(() => {
             history.push("/")
         }, 2000)
 
-    }, [state, history]);
+    }, [settings, history, setSettings]);
 
     // input's clear button callback
     const onClearCallback = useCallback(e => {
         e.preventDefault();
         const id = e.currentTarget.id;
-        setState({...state, [id]: ''})
-    }, [state, setState]);
+        setSettings({...settings, [id]: ''})
+    }, [settings, setSettings]);
 
 
     return (
         <form action="#">
             <span
                 className={Object.values(errors).some(Boolean) ? "reg-text attention" : "hidden"}>Fill out all inputs</span>
+
+            <NotFoundError state={serverError} repository={serverError["repository"]}/>
+
             {inputs.map(input => {
                 return (
-                    <Input inputType={input.inputType} inputValue={state[input.inputId]} inputState={state}
+                    <Input inputType={input.inputType} inputValue={settings[input.inputId]} inputState={settings}
                            handleInputChange={onChangeCallback}
                            handleInputClear={onClearCallback}
                            inputId={input.inputId} inputPlaceholder={input.placeholder} inputLabel={input.inputLabel}
                            importantStatus={input.importantField}/>
-
                 )
             })}
             <div className="buttons">

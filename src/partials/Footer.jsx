@@ -1,15 +1,20 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
-export default function Footer() {
+export default function Footer(props) {
+    const {links, copyright} = props;
+
     return (
         <footer>
             <div className="footer-container">
                 <div className="footer-nav">
-                    <a href="#" className="secondary-text">Support</a>
-                    <a href="#" className="secondary-text">Learning</a>
-                    <a href="#" className="secondary-text">Русская версия</a>
+                    {links.map(link => {
+                        return(
+                            <Link to={link.href} className="secondary-text">{link.value}</Link>
+                        )
+                    })}
                 </div>
-                <p className="secondary-text">© 2020 Your Name</p>
+                <p className="secondary-text">&copy; {copyright}</p>
             </div>
         </footer>
     )
